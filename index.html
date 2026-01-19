@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asegurador Online - Conecta con tu gestor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">AO</div>
+        <div>
+          <p class="eyebrow">Gestor de seguros</p>
+          <h1>Asegurador Online</h1>
+        </div>
+      </div>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Abrir menu">
+        ☰
+      </button>
+      <nav class="nav">
+        <a href="#form">Enviar consulta</a>
+        <a href="#ventajas">Por que elegirnos</a>
+        <a href="#faq">Preguntas</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero__copy">
+          <p class="eyebrow">Tu solicitud en menos de 1 minuto</p>
+          <h2>Conecta con un gestor real y encuentra el seguro que encaja contigo.</h2>
+          <p class="lede">Describe lo que necesitas: auto, salud, hogar, vida o empresa. Tu gestor responde por correo o telefono con una propuesta personalizada.</p>
+          <div class="cta-row">
+            <a class="btn primary" href="#form">Enviar mi consulta</a>
+            <a class="btn ghost" href="#faq">Resolver dudas</a>
+          </div>
+          <div class="trust">
+            <div class="trust-track">
+              <div class="pill">Tiempo de respuesta: 2-4 horas</div>
+              <div class="pill">Atencion humana, cero bots</div>
+              <div class="pill">Sin costo por la gestion</div>
+              <div class="pill">Tiempo de respuesta: 2-4 horas</div>
+              <div class="pill">Atencion humana, cero bots</div>
+              <div class="pill">Sin costo por la gestion</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" id="form-card">
+          <p class="eyebrow">Formulario express</p>
+          <h3>Cuentanos tu necesidad</h3>
+          <form id="form" class="lead-form" novalidate>
+            <label>
+              Nombre completo
+              <input type="text" name="nombre" placeholder="Tu nombre" required />
+            </label>
+            <label>
+              Correo
+              <input type="email" name="correo" placeholder="tucorreo@correo.com" required />
+            </label>
+            <label>
+              Telefono
+              <input type="tel" name="telefono" placeholder="Ej: +54 11 5555 5555" required />
+            </label>
+            <label>
+              Tipo de seguro
+              <select name="tipo" required>
+                <option value="">Selecciona una opcion</option>
+                <option>Auto</option>
+                <option>Salud</option>
+                <option>Hogar</option>
+                <option>Vida</option>
+                <option>Empresa</option>
+                <option>Otro</option>
+              </select>
+            </label>
+            <label>
+              Detalles de lo que buscas
+              <textarea name="mensaje" rows="4" placeholder="Cobertura deseada, vehiculo, provincia, presupuesto..." required></textarea>
+            </label>
+            <label class="consent">
+              <input type="checkbox" name="consent" required />
+              Acepto que un gestor me contacte por los datos ingresados.
+            </label>
+            <button type="submit" class="btn primary">Enviar consulta</button>
+            <p class="helper">Tus datos se usan solo para que un gestor te contacte. No compartimos con terceros.</p>
+            <p class="status" id="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="section" id="ventajas">
+        <div class="section__header">
+          <p class="eyebrow">Por que elegirnos</p>
+          <h3>Disenamos tu seguro a medida</h3>
+          <p class="lede">Compara opciones sin moverte y recibe una propuesta ajustada a tu perfil, con un especialista que te acompaña.</p>
+        </div>
+        <div class="grid">
+          <article class="feature">
+            <div class="icon">⏱</div>
+            <h4>Respuesta agil</h4>
+            <p>Enviamos una propuesta inicial en horas, no en dias.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">🤝</div>
+            <h4>Trato humano</h4>
+            <p>Hablas con un gestor real que resuelve tus dudas.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">📄</div>
+            <h4>Documentacion clara</h4>
+            <p>Recibes condiciones y coberturas explicadas en lenguaje simple.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">🔒</div>
+            <h4>Datos protegidos</h4>
+            <p>Solo usamos tu informacion para contactarte sobre tu solicitud.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="section__header">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h3>Lo que suelen preguntar</h3>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>Que pasa despues de enviar el formulario?</summary>
+            <p>Un gestor revisa tu solicitud y te escribe por correo o telefono con preguntas puntuales y una propuesta inicial.</p>
+          </details>
+          <details>
+            <summary>Tiene costo la gestion?</summary>
+            <p>No. La asesoría y cotizacion son sin costo. Solo pagas la poliza que elijas.</p>
+          </details>
+          <details>
+            <summary>Pueden adaptar la cobertura?</summary>
+            <p>Si. Ajustamos deducibles, sumas aseguradas y asistencias segun tu caso.</p>
+          </details>
+          <details>
+            <summary>En que zonas operan?</summary>
+            <p>Trabajamos de forma remota y coordinamos con aseguradoras disponibles en tu region.</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Asegurador Online - Gestion humana y respuestas claras.</p>
+      <div class="footer__contact">
+        <span>Whatsapp: +54 11 4444 4444</span>
+        <span>Correo: contacto@asegurador.online</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
