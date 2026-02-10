@@ -452,12 +452,15 @@ details p {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
+  text-align: center;
 }
 
 .footer__contact {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
 }
 
 .eyebrow {
