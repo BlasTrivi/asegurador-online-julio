@@ -1,8 +1,8 @@
 :root {
   --bg: #0f172a;
   --card: #0b1020;
-  --accent: #36c1fd;
-  --accent-strong: #331483;
+  --accent: #2a90d1;
+  --accent-strong: #2557aa;
   --text: #e6ecff;
   --muted: #9db2ce;
   --border: rgba(255, 255, 255, 0.12);
@@ -20,7 +20,7 @@ body {
   font-family: "Space Grotesk", "Segoe UI", sans-serif;
   background: radial-gradient(circle at 20% 20%, #331483, transparent 35%),
     radial-gradient(circle at 80% 10%, #1e2f5a, transparent 25%),
-    radial-gradient(circle at 50% 80%, #36c1fd, transparent 35%),
+    radial-gradient(circle at 50% 80%, #2a90d1, transparent 35%),
     var(--bg);
   color: var(--text);
   min-height: 100vh;
@@ -170,7 +170,7 @@ nav a:hover {
 .btn.primary {
   background: linear-gradient(120deg, var(--accent), var(--accent-strong));
   color: #ffffff;
-  box-shadow: 0 8px 25px rgba(54, 193, 253, 0.4), 0 4px 12px rgba(51, 20, 131, 0.3);
+  box-shadow: 0 6px 18px rgba(42, 144, 209, 0.26), 0 3px 10px rgba(37, 87, 170, 0.24);
   font-weight: 700;
   font-size: 16px;
   padding: 14px 28px;
@@ -178,21 +178,21 @@ nav a:hover {
 
 .btn.primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(54, 193, 253, 0.5), 0 6px 16px rgba(51, 20, 131, 0.4);
+  box-shadow: 0 10px 24px rgba(42, 144, 209, 0.32), 0 5px 14px rgba(37, 87, 170, 0.28);
 }
 
 .btn.ghost {
-  border: 2px solid rgba(54, 193, 253, 0.4);
+  border: 2px solid rgba(42, 144, 209, 0.38);
   color: var(--text);
-  background: rgba(54, 193, 253, 0.08);
+  background: rgba(42, 144, 209, 0.08);
   font-weight: 600;
   font-size: 16px;
   padding: 14px 28px;
 }
 
 .btn.ghost:hover {
-  background: rgba(54, 193, 253, 0.15);
-  border-color: rgba(54, 193, 253, 0.6);
+  background: rgba(42, 144, 209, 0.12);
+  border-color: rgba(42, 144, 209, 0.5);
 }
 
 .trust {
@@ -204,9 +204,9 @@ nav a:hover {
 .pill {
   padding: 10px 16px;
   border-radius: 999px;
-  border: 1px solid rgba(54, 193, 253, 0.3);
+  border: 1px solid rgba(42, 144, 209, 0.28);
   color: var(--text);
-  background: rgba(54, 193, 253, 0.08);
+  background: rgba(42, 144, 209, 0.08);
   font-size: 14px;
   font-weight: 500;
 }

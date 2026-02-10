@@ -8,10 +8,6 @@ function setStatus(message, type = 'ok') {
   statusEl.style.color = type === 'ok' ? 'var(--accent)' : '#f48c8c';
 }
 
-function validateEmail(email) {
-  return /.+@.+\..+/.test(email);
-}
-
 function validatePhone(phone) {
   return phone.replace(/\D/g, '').length >= 8;
 }
@@ -29,20 +25,14 @@ form.addEventListener('submit', (event) => {
   const formData = new FormData(form);
   const payload = {
     nombre: formData.get('nombre')?.trim(),
-    correo: formData.get('correo')?.trim(),
     telefono: formData.get('telefono')?.trim(),
     tipo: formData.get('tipo'),
     mensaje: formData.get('mensaje')?.trim(),
     consent: formData.get('consent') === 'on',
   };
 
-  if (!payload.nombre || !payload.correo || !payload.telefono || !payload.tipo || !payload.mensaje) {
+  if (!payload.nombre || !payload.telefono || !payload.tipo || !payload.mensaje) {
     setStatus('Completa todos los campos para continuar.', 'error');
-    return;
-  }
-
-  if (!validateEmail(payload.correo)) {
-    setStatus('Ingresa un correo valido.', 'error');
     return;
   }
 
