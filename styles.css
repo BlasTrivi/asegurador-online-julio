@@ -22,6 +22,8 @@ body {
     radial-gradient(circle at 80% 10%, #1e2f5a, transparent 25%),
     radial-gradient(circle at 50% 80%, #2a90d1, transparent 35%),
     var(--bg);
+  background-size: 140% 140%;
+  animation: bg-pan 22s ease-in-out infinite alternate;
   color: var(--text);
   min-height: 100vh;
   line-height: 1.6;
@@ -124,6 +126,8 @@ nav a:hover {
   min-height: calc(100vh - 120px);
   justify-content: center;
   padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
 }
 
 .hero__copy {
@@ -174,11 +178,26 @@ nav a:hover {
   font-weight: 700;
   font-size: 16px;
   padding: 14px 28px;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn.primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(42, 144, 209, 0.32), 0 5px 14px rgba(37, 87, 170, 0.28);
+}
+
+.btn.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.12), transparent 55%);
+  transform: translateX(-120%);
+  transition: transform 0.4s ease;
+}
+
+.btn.primary:hover::after {
+  transform: translateX(0);
 }
 
 .btn.ghost {
@@ -242,6 +261,13 @@ nav a:hover {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: float 10s ease-in-out infinite;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
 }
 
 h3 {
@@ -333,6 +359,17 @@ textarea {
   margin-top: 6px;
 }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(18px) scale(0.99);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
 .section {
   margin: 60px 0;
 }
@@ -355,6 +392,13 @@ textarea {
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(42, 144, 209, 0.4);
+  box-shadow: 0 20px 38px rgba(0, 0, 0, 0.3);
 }
 
 .icon {
@@ -423,6 +467,68 @@ details p {
   color: var(--accent);
   margin: 0;
   font-weight: 600;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(42, 144, 209, 0.35), transparent 55%);
+  top: -120px;
+  right: -120px;
+  filter: blur(30px);
+  animation: drift 18s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(37, 87, 170, 0.28), transparent 60%);
+  bottom: -120px;
+  left: -60px;
+  filter: blur(26px);
+  animation: drift 16s ease-in-out infinite reverse;
+  pointer-events: none;
+}
+
+@keyframes bg-pan {
+  0% {
+    background-position: 0% 0%, 80% 0%, 40% 80%, center;
+  }
+  50% {
+    background-position: 20% 10%, 60% 20%, 30% 70%, center;
+  }
+  100% {
+    background-position: 40% 20%, 40% 10%, 60% 60%, center;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(20px, -20px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @media (max-width: 1024px) {

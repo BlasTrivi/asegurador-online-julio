@@ -64,3 +64,21 @@ if (navToggle && nav) {
     });
   });
 }
+
+const revealEls = document.querySelectorAll('.reveal');
+
+if (revealEls.length) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.18 }
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+}
