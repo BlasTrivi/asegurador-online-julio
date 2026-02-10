@@ -314,6 +314,25 @@ textarea {
   color: var(--accent);
 }
 
+.sc-section {
+  margin-top: 20px;
+}
+
+.sc-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.sc-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
 .section {
   margin: 60px 0;
 }
