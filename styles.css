@@ -610,6 +610,16 @@ details p {
 }
 
 @media (max-width: 640px) {
+  .hero {
+    gap: 22px;
+    padding: 28px 14px;
+    min-height: auto;
+  }
+
+  .hero > * {
+    max-width: 100%;
+  }
+
   .hero__copy h2 {
     font-size: 30px;
     line-height: 1.3;
@@ -619,11 +629,27 @@ details p {
     font-size: 16px;
   }
 
+  .cta-row {
+    margin: 24px 0 18px;
+  }
+
   .btn,
   nav a {
     width: 100%;
     justify-content: center;
     text-align: center;
+  }
+
+  .trust-track {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .pill {
+    width: auto;
   }
 
   .card {
@@ -661,12 +687,13 @@ details p {
   .hero {
     gap: 24px;
     max-width: 100%;
-    min-height: calc(100vh - 80px);
-    padding: 30px 14px;
+    min-height: auto;
+    padding: 24px 12px;
   }
 
   .hero__copy h2 {
     font-size: 24px;
+    line-height: 1.25;
   }
 
   .card,
@@ -697,7 +724,8 @@ details p {
   }
 
   .hero__copy h2 {
-    font-size: 26px;
+    font-size: 22px;
+    line-height: 1.25;
   }
 
   .lede {
