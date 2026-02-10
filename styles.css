@@ -57,15 +57,21 @@ body {
 }
 
 .logo {
-  width: 42px;
-  height: 42px;
+  width: 46px;
+  height: 46px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  color: #ffffff;
-  font-weight: 700;
+  background: rgba(255, 255, 255, 0.06);
   display: grid;
   place-items: center;
   box-shadow: var(--shadow);
+  padding: 6px;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 h1 {
@@ -263,6 +269,10 @@ nav a:hover {
   margin-right: auto;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   animation: float 10s ease-in-out infinite;
+}
+
+.card:last-of-type {
+  margin-bottom: 20px;
 }
 
 .card:hover {
@@ -603,6 +613,15 @@ details p {
     text-align: center;
   }
 
+  .card {
+    animation: none;
+  }
+
+  .hero::before,
+  .hero::after {
+    display: none;
+  }
+
   .grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
@@ -642,6 +661,10 @@ details p {
     padding: 16px;
   }
 
+  .cta-row {
+    gap: 12px;
+  }
+
   input,
   select,
   textarea {
@@ -676,5 +699,21 @@ details p {
   .logo {
     width: 36px;
     height: 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .card,
+  .btn.primary,
+  .feature,
+  .trust-track,
+  .reveal {
+    animation: none !important;
   }
 }
