@@ -470,25 +470,25 @@ section,
   margin-left: auto;
   margin-right: auto;
   margin-top: 24px;
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: rgba(7, 14, 31, 0.75);
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
 }
 
 .gallery__viewport {
   position: relative;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
-  min-height: clamp(260px, 44vw, 460px);
-  aspect-ratio: 16 / 9;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: #0a1328;
+  min-height: clamp(240px, 42vw, 430px);
+  aspect-ratio: 16 / 8.8;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(10, 19, 40, 0.5);
 }
 
 .gallery__track {
   position: relative;
-  min-height: inherit;
+  height: 100%;
 }
 
 .gallery__slide {
@@ -511,7 +511,7 @@ section,
   height: 100%;
   min-height: 0;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   display: block;
 }
 
@@ -540,11 +540,11 @@ section,
 }
 
 .gallery__control--prev {
-  left: 14px;
+  left: 10px;
 }
 
 .gallery__control--next {
-  right: 14px;
+  right: 10px;
 }
 
 summary {

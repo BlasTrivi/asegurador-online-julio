@@ -18,6 +18,17 @@ function saveLead(data) {
   localStorage.setItem('leads', JSON.stringify(existing));
 }
 
+function buildWhatsappMessage(data) {
+  return [
+    'Nueva consulta desde TeCubro',
+    '',
+    `Nombre: ${data.nombre}`,
+    `Telefono: ${data.telefono}`,
+    `Tipo de seguro: ${data.tipo}`,
+    `Detalle: ${data.mensaje}`,
+  ].join('\n');
+}
+
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   setStatus('');
@@ -47,7 +58,14 @@ form.addEventListener('submit', (event) => {
   }
 
   saveLead(payload);
-  setStatus('Listo. Un gestor te contactara en breve.');
+  const whatsappNumber = '3415690322';
+  const message = buildWhatsappMessage(payload);
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const popup = window.open(whatsappUrl, '_blank', 'noopener');
+  if (!popup) {
+    window.location.href = whatsappUrl;
+  }
+  setStatus('Listo. Abrimos WhatsApp con tu consulta para enviar.');
   form.reset();
 });
 
