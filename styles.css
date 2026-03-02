@@ -621,14 +621,15 @@ details p {
 
 .whatsapp-float {
   position: fixed;
-  right: 18px;
-  bottom: 18px;
-  width: 56px;
-  height: 56px;
+  right: clamp(10px, 2vw, 18px);
+  bottom: calc(clamp(10px, 2vw, 18px) + env(safe-area-inset-bottom, 0px));
+  width: clamp(48px, 8vw, 56px);
+  height: clamp(48px, 8vw, 56px);
   border-radius: 999px;
   background: #25d366;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
   z-index: 30;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -640,9 +641,10 @@ details p {
 }
 
 .whatsapp-float svg {
-  width: 30px;
-  height: 30px;
+  width: 58%;
+  height: 58%;
   display: block;
+  flex: 0 0 auto;
 }
 
 .eyebrow {
@@ -906,10 +908,7 @@ details p {
   }
 
   .whatsapp-float {
-    width: 52px;
-    height: 52px;
-    right: 12px;
-    bottom: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
   }
 }
 
