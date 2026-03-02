@@ -619,6 +619,32 @@ details p {
   justify-content: center;
 }
 
+.whatsapp-float {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: #25d366;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+  z-index: 30;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.35);
+}
+
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
 .eyebrow {
   text-transform: uppercase;
   font-size: 13px;
@@ -877,6 +903,13 @@ details p {
 
   .gallery__control--next {
     right: 8px;
+  }
+
+  .whatsapp-float {
+    width: 52px;
+    height: 52px;
+    right: 12px;
+    bottom: 12px;
   }
 }
 
