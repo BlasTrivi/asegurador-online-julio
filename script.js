@@ -82,3 +82,72 @@ if (revealEls.length) {
 
   revealEls.forEach((el) => observer.observe(el));
 }
+
+const gallery = document.querySelector('[data-gallery]');
+
+if (gallery) {
+  const slides = Array.from(gallery.querySelectorAll('.gallery__slide'));
+  const thumbs = Array.from(gallery.querySelectorAll('.gallery__thumb'));
+  const prevBtn = gallery.querySelector('.gallery__control--prev');
+  const nextBtn = gallery.querySelector('.gallery__control--next');
+  let currentIndex = 0;
+  let autoplayId;
+
+  function renderGallery(index) {
+    currentIndex = (index + slides.length) % slides.length;
+
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('is-active', i === currentIndex);
+    });
+
+    thumbs.forEach((thumb, i) => {
+      const isActive = i === currentIndex;
+      thumb.classList.toggle('is-active', isActive);
+      if (isActive) {
+        thumb.setAttribute('aria-current', 'true');
+      } else {
+        thumb.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function startAutoplay() {
+    clearInterval(autoplayId);
+    autoplayId = setInterval(() => {
+      renderGallery(currentIndex + 1);
+    }, 4200);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayId);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      renderGallery(currentIndex - 1);
+      startAutoplay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      renderGallery(currentIndex + 1);
+      startAutoplay();
+    });
+  }
+
+  thumbs.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => {
+      renderGallery(index);
+      startAutoplay();
+    });
+  });
+
+  gallery.addEventListener('mouseenter', stopAutoplay);
+  gallery.addEventListener('mouseleave', startAutoplay);
+  gallery.addEventListener('touchstart', stopAutoplay, { passive: true });
+  gallery.addEventListener('touchend', startAutoplay, { passive: true });
+
+  renderGallery(0);
+  startAutoplay();
+}
