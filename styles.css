@@ -760,15 +760,16 @@ details p {
   }
 
   .trust-track {
-    animation: none;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
+    animation: trust-marquee 16s linear infinite;
+    width: max-content;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 10px;
   }
 
   .pill {
     width: auto;
+    white-space: nowrap;
   }
 
   .card {
