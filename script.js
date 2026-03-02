@@ -122,7 +122,7 @@ if (gallery) {
     clearInterval(autoplayId);
     autoplayId = setInterval(() => {
       renderGallery(currentIndex + 1);
-    }, 4200);
+    }, 4000);
   }
 
   function stopAutoplay() {
