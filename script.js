@@ -58,7 +58,7 @@ form.addEventListener('submit', (event) => {
   }
 
   saveLead(payload);
-  const whatsappNumber = '3415690322';
+  const whatsappNumber = '3415764047';
   const message = buildWhatsappMessage(payload);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
   const popup = window.open(whatsappUrl, '_blank', 'noopener');
