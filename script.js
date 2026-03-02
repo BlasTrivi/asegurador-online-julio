@@ -87,7 +87,6 @@ const gallery = document.querySelector('[data-gallery]');
 
 if (gallery) {
   const slides = Array.from(gallery.querySelectorAll('.gallery__slide'));
-  const thumbs = Array.from(gallery.querySelectorAll('.gallery__thumb'));
   const prevBtn = gallery.querySelector('.gallery__control--prev');
   const nextBtn = gallery.querySelector('.gallery__control--next');
   let currentIndex = 0;
@@ -98,16 +97,6 @@ if (gallery) {
 
     slides.forEach((slide, i) => {
       slide.classList.toggle('is-active', i === currentIndex);
-    });
-
-    thumbs.forEach((thumb, i) => {
-      const isActive = i === currentIndex;
-      thumb.classList.toggle('is-active', isActive);
-      if (isActive) {
-        thumb.setAttribute('aria-current', 'true');
-      } else {
-        thumb.removeAttribute('aria-current');
-      }
     });
   }
 
@@ -135,13 +124,6 @@ if (gallery) {
       startAutoplay();
     });
   }
-
-  thumbs.forEach((thumb, index) => {
-    thumb.addEventListener('click', () => {
-      renderGallery(index);
-      startAutoplay();
-    });
-  });
 
   gallery.addEventListener('mouseenter', stopAutoplay);
   gallery.addEventListener('mouseleave', startAutoplay);
