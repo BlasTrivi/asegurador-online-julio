@@ -20,7 +20,7 @@ function saveLead(data) {
 
 function buildWhatsappMessage(data) {
   return [
-    'Nueva consulta desde TeCubro',
+    'Nueva consulta desde TeCubroya',
     '',
     `Nombre: ${data.nombre}`,
     `Telefono: ${data.telefono}`,
