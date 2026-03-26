@@ -7,6 +7,7 @@
   --muted: #9db2ce;
   --border: rgba(255, 255, 255, 0.12);
   --shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --radius: 16px;
   --radius-lg: 24px;
 }
@@ -108,13 +109,32 @@ nav a {
   padding: 8px 14px;
   border-radius: 10px;
   border: 1px solid transparent;
-  transition: all 0.2s ease;
+  transition: color 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth),
+    border-color 0.25s var(--ease-smooth), transform 0.25s var(--ease-smooth);
+  position: relative;
 }
 
 nav a:hover {
   color: var(--text);
   border-color: var(--border);
   background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 6px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-smooth);
+}
+
+nav a:hover::after {
+  opacity: 0.9;
 }
 
 .nav-toggle {
@@ -194,7 +214,8 @@ nav a:hover {
   text-decoration: none;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth),
+    background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth);
 }
 
 .btn.primary {
@@ -211,6 +232,10 @@ nav a:hover {
 .btn.primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 24px rgba(42, 144, 209, 0.32), 0 5px 14px rgba(37, 87, 170, 0.28);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.99);
 }
 
 .btn.primary::after {
@@ -287,8 +312,20 @@ nav a:hover {
   width: min(700px, 100%);
   margin-left: auto;
   margin-right: auto;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
   animation: float 10s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 0%, rgba(42, 144, 209, 0.12), transparent 55%);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-smooth);
+  pointer-events: none;
 }
 
 .card:last-of-type {
@@ -298,6 +335,10 @@ nav a:hover {
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 h3 {
@@ -331,7 +372,8 @@ textarea {
   color: var(--text);
   font-size: 15px;
   outline: none;
-  transition: border 0.2s ease, background 0.2s ease;
+  transition: border 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth),
+    box-shadow 0.25s var(--ease-smooth);
 }
 
 select {
@@ -353,6 +395,7 @@ select:focus,
 textarea:focus {
   border-color: var(--accent);
   background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(42, 144, 209, 0.15);
 }
 
 textarea {
@@ -406,12 +449,15 @@ textarea {
 .reveal {
   opacity: 0;
   transform: translateY(18px) scale(0.99);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  filter: blur(2px);
+  transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth),
+    filter 0.7s var(--ease-smooth);
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 .section {
@@ -448,7 +494,8 @@ section,
   border: 1px solid var(--border);
   background: var(--card);
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth),
+    border-color 0.3s var(--ease-smooth);
 }
 
 .feature:hover {
@@ -530,7 +577,7 @@ section,
 
 .gallery__slide.is-active {
   display: block;
-  animation: fade-in 0.25s ease;
+  animation: fade-in 0.35s var(--ease-smooth);
 }
 
 .gallery__slide img {
@@ -540,6 +587,11 @@ section,
   object-fit: cover;
   object-position: center center;
   display: block;
+  transition: transform 6s ease;
+}
+
+.gallery__slide.is-active img {
+  transform: scale(1.02);
 }
 
 .gallery__control {
@@ -557,13 +609,15 @@ section,
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth),
+    transform 0.25s var(--ease-smooth);
   z-index: 2;
 }
 
 .gallery__control:hover {
   background: rgba(17, 31, 59, 0.92);
   border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-50%) scale(1.06);
 }
 
 .gallery__control--prev {
@@ -593,6 +647,13 @@ details {
   border-radius: var(--radius);
   padding: 12px 14px;
   background: rgba(255, 255, 255, 0.03);
+  transition: background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth),
+    transform 0.25s var(--ease-smooth);
+}
+
+details[open] {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(42, 144, 209, 0.35);
 }
 
 details p {
@@ -641,7 +702,8 @@ details p {
   padding: 6px 10px;
   border-radius: 10px;
   border: 1px solid transparent;
-  transition: all 0.2s ease;
+  transition: color 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth),
+    border-color 0.25s var(--ease-smooth), transform 0.25s var(--ease-smooth);
 }
 
 .footer__links a:hover,
@@ -649,6 +711,7 @@ details p {
   color: var(--text);
   border-color: var(--border);
   background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
 }
 
 .footer__copy {
@@ -796,6 +859,7 @@ details p {
 
   nav.nav.open {
     display: flex;
+    animation: nav-drop 0.25s var(--ease-smooth);
   }
 
   nav a {
@@ -803,6 +867,17 @@ details p {
     border: 1px solid var(--border);
     background: rgba(255, 255, 255, 0.03);
     padding: 10px 12px;
+  }
+}
+
+@keyframes nav-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
