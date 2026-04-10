@@ -60,7 +60,6 @@ form.addEventListener('submit', (event) => {
     tipo: formData.get('tipo'),
     mensaje: formData.get('mensaje')?.trim(),
     consent: formData.get('consent') === 'on',
-    terms: formData.get('terms') === 'on',
   };
 
   if (!payload.nombre || !payload.telefono || !payload.tipo || !payload.mensaje) {
@@ -76,13 +75,7 @@ form.addEventListener('submit', (event) => {
   }
 
   if (!payload.consent) {
-    setStatus('Debes aceptar el consentimiento de contacto para continuar.', 'error');
-    isSubmitting = false;
-    return;
-  }
-
-  if (!payload.terms) {
-    setStatus('Debes aceptar los terminos y la politica de privacidad.', 'error');
+    setStatus('Debes aceptar el consentimiento para continuar.', 'error');
     isSubmitting = false;
     return;
   }
