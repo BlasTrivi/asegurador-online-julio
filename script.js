@@ -3,6 +3,7 @@ const statusEl = document.querySelector('#status');
 const navToggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.nav');
 const topbar = document.querySelector('.topbar');
+let isSubmitting = false;
 
 requestAnimationFrame(() => {
   document.body.classList.add('page-ready');
@@ -44,6 +45,12 @@ function buildWhatsappMessage(data) {
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
+
+  if (isSubmitting) {
+    return;
+  }
+
+  isSubmitting = true;
   setStatus('');
 
   const formData = new FormData(form);
@@ -57,16 +64,19 @@ form.addEventListener('submit', (event) => {
 
   if (!payload.nombre || !payload.telefono || !payload.tipo || !payload.mensaje) {
     setStatus('Completa todos los campos para continuar.', 'error');
+    isSubmitting = false;
     return;
   }
 
   if (!validatePhone(payload.telefono)) {
     setStatus('Ingresa un telefono valido.', 'error');
+    isSubmitting = false;
     return;
   }
 
   if (!payload.consent) {
     setStatus('Debes aceptar el consentimiento de contacto.', 'error');
+    isSubmitting = false;
     return;
   }
 
@@ -74,12 +84,10 @@ form.addEventListener('submit', (event) => {
   const whatsappNumber = '3415764047';
   const message = buildWhatsappMessage(payload);
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  const popup = window.open(whatsappUrl, '_blank', 'noopener');
-  if (!popup) {
-    window.location.href = whatsappUrl;
-  }
-  setStatus('Listo. TeCubroya abrio WhatsApp con tu consulta para enviar.');
+
+  setStatus('Listo. TeCubroya te redirige a WhatsApp con tu consulta lista.');
   form.reset();
+  window.location.assign(whatsappUrl);
 });
 
 if (navToggle && nav) {
