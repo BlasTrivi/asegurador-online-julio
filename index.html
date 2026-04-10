@@ -83,12 +83,18 @@
               Detalles de lo que buscas
               <textarea name="mensaje" rows="4" placeholder="Cobertura deseada, vehiculo, provincia, presupuesto..." required></textarea>
             </label>
-            <label class="consent">
-              <input type="checkbox" name="consent" required />
-              Acepto que un gestor me contacte por los datos ingresados.
-            </label>
+            <div class="legal-consent">
+              <label class="consent consent--stack">
+                <input type="checkbox" name="consent" required />
+                <span>Acepto que un asesor de TeCubroya me contacte por WhatsApp o telefono para responder esta solicitud.</span>
+              </label>
+              <label class="consent consent--stack">
+                <input type="checkbox" name="terms" required />
+                <span>Acepto los terminos de uso y la politica de privacidad de TeCubroya. Entiendo que mis datos se usan solo para cotizacion y gestion de seguros.</span>
+              </label>
+            </div>
             <button type="submit" class="btn primary">Enviar consulta por WhatsApp</button>
-            <p class="helper">Tus datos se usan solo para que un gestor te contacte. No compartimos con terceros.</p>
+            <p class="helper">Al enviar, se abrira WhatsApp con el mensaje precompletado para confirmar tu consulta.</p>
             <p class="status" id="status"></p>
           </form>
         </div>
