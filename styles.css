@@ -38,6 +38,12 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-smooth);
+}
+
+body.page-ready {
+  opacity: 1;
 }
 
 img,
@@ -50,6 +56,7 @@ svg {
   width: min(1200px, 100%);
   margin: 0 auto;
   padding: clamp(20px, 3vw, 32px) clamp(12px, 2.4vw, 20px) clamp(40px, 6vw, 64px);
+  animation: page-enter 0.7s var(--ease-smooth);
 }
 
 .topbar {
@@ -65,6 +72,30 @@ svg {
   position: sticky;
   top: 16px;
   z-index: 6;
+  transition: background 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth),
+    box-shadow 0.35s var(--ease-smooth), transform 0.35s var(--ease-smooth);
+}
+
+.topbar::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(42, 144, 209, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-smooth);
+}
+
+.topbar.is-scrolled {
+  background: rgba(11, 16, 32, 0.8);
+  border-color: rgba(42, 144, 209, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
+}
+
+.topbar.is-scrolled::before {
+  opacity: 1;
 }
 
 .brand {
@@ -82,6 +113,17 @@ svg {
   place-items: center;
   box-shadow: var(--shadow);
   padding: 6px;
+  position: relative;
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 16px;
+  border: 1px solid rgba(42, 144, 209, 0.2);
+  opacity: 0.6;
+  animation: logo-pulse 3.2s ease-in-out infinite;
 }
 
 .logo img {
@@ -216,6 +258,7 @@ nav a:hover::after {
   cursor: pointer;
   transition: transform 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth),
     background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth);
+  will-change: transform;
 }
 
 .btn.primary {
@@ -227,6 +270,18 @@ nav a:hover::after {
   padding: 14px 28px;
   position: relative;
   overflow: hidden;
+}
+
+.btn.primary::before {
+  content: "";
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  top: -40%;
+  left: -40%;
+  background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.18), transparent 35%);
+  animation: button-orbit 5.5s linear infinite;
+  pointer-events: none;
 }
 
 .btn.primary:hover {
@@ -359,6 +414,11 @@ label {
   gap: 6px;
   color: var(--text);
   font-weight: 500;
+  transition: transform 0.2s var(--ease-smooth);
+}
+
+.lead-form label:focus-within {
+  transform: translateY(-1px);
 }
 
 input,
@@ -374,6 +434,12 @@ textarea {
   outline: none;
   transition: border 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth),
     box-shadow 0.25s var(--ease-smooth);
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: rgba(42, 144, 209, 0.35);
 }
 
 select {
@@ -452,6 +518,7 @@ textarea {
   filter: blur(2px);
   transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth),
     filter 0.7s var(--ease-smooth);
+  transition-delay: var(--reveal-delay, 0ms);
 }
 
 .reveal.is-visible {
@@ -496,12 +563,30 @@ section,
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.25);
   transition: transform 0.3s var(--ease-smooth), box-shadow 0.3s var(--ease-smooth),
     border-color 0.3s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature::before {
+  content: "";
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: -120%;
+  left: -20%;
+  background: linear-gradient(125deg, transparent 35%, rgba(255, 255, 255, 0.08), transparent 65%);
+  transition: transform 0.55s var(--ease-smooth);
+  pointer-events: none;
 }
 
 .feature:hover {
   transform: translateY(-6px) scale(1.01);
   border-color: rgba(42, 144, 209, 0.4);
   box-shadow: 0 20px 38px rgba(0, 0, 0, 0.3);
+}
+
+.feature:hover::before {
+  transform: translateY(165%);
 }
 
 .icon {
@@ -592,6 +677,7 @@ section,
 
 .gallery__slide.is-active img {
   transform: scale(1.02);
+  animation: gallery-kenburns 5.5s ease-out;
 }
 
 .gallery__control {
@@ -612,6 +698,10 @@ section,
   transition: background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth),
     transform 0.25s var(--ease-smooth);
   z-index: 2;
+}
+
+.gallery__control.is-bump {
+  animation: control-bump 0.35s var(--ease-smooth);
 }
 
 .gallery__control:hover {
@@ -637,6 +727,27 @@ section,
   }
 }
 
+@keyframes gallery-kenburns {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.02);
+  }
+}
+
+@keyframes control-bump {
+  0% {
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    transform: translateY(-50%) scale(1.13);
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+}
+
 summary {
   cursor: pointer;
   font-weight: 600;
@@ -649,6 +760,10 @@ details {
   background: rgba(255, 255, 255, 0.03);
   transition: background 0.25s var(--ease-smooth), border-color 0.25s var(--ease-smooth),
     transform 0.25s var(--ease-smooth);
+}
+
+details:hover {
+  transform: translateY(-1px);
 }
 
 details[open] {
@@ -732,6 +847,7 @@ details p {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
   z-index: 30;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: whatsapp-pulse 2.6s ease-in-out infinite;
 }
 
 .whatsapp-float:hover {
@@ -793,6 +909,17 @@ details p {
   }
 }
 
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes float {
   0% {
     transform: translateY(0);
@@ -814,6 +941,37 @@ details p {
   }
   100% {
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes logo-pulse {
+  0%,
+  100% {
+    transform: scale(0.98);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.75;
+  }
+}
+
+@keyframes button-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes whatsapp-pulse {
+  0%,
+  100% {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(37, 211, 102, 0.35);
+  }
+  50% {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32), 0 0 0 10px rgba(37, 211, 102, 0);
   }
 }
 
@@ -926,6 +1084,10 @@ details p {
   }
 
   .card {
+    animation: none;
+  }
+
+  .whatsapp-float {
     animation: none;
   }
 
@@ -1061,5 +1223,12 @@ details p {
   .trust-track,
   .reveal {
     animation: none !important;
+  }
+
+  body,
+  .page,
+  .topbar,
+  .whatsapp-float {
+    transition: none !important;
   }
 }

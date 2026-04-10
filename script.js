@@ -2,6 +2,19 @@ const form = document.querySelector('#form');
 const statusEl = document.querySelector('#status');
 const navToggle = document.querySelector('.nav-toggle');
 const nav = document.querySelector('.nav');
+const topbar = document.querySelector('.topbar');
+
+requestAnimationFrame(() => {
+  document.body.classList.add('page-ready');
+});
+
+function syncTopbarState() {
+  if (!topbar) return;
+  topbar.classList.toggle('is-scrolled', window.scrollY > 16);
+}
+
+syncTopbarState();
+window.addEventListener('scroll', syncTopbarState, { passive: true });
 
 function setStatus(message, type = 'ok') {
   statusEl.textContent = message;
@@ -65,7 +78,7 @@ form.addEventListener('submit', (event) => {
   if (!popup) {
     window.location.href = whatsappUrl;
   }
-  setStatus('Listo. Abrimos WhatsApp con tu consulta para enviar.');
+  setStatus('Listo. TeCubroya abrio WhatsApp con tu consulta para enviar.');
   form.reset();
 });
 
@@ -86,6 +99,11 @@ if (navToggle && nav) {
 const revealEls = document.querySelectorAll('.reveal');
 
 if (revealEls.length) {
+  revealEls.forEach((el, index) => {
+    const delay = Math.min((index % 6) * 90, 450);
+    el.style.setProperty('--reveal-delay', `${delay}ms`);
+  });
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -110,6 +128,12 @@ if (gallery) {
   let currentIndex = 0;
   let autoplayId;
 
+  function bumpControl(control) {
+    if (!control) return;
+    control.classList.remove('is-bump');
+    requestAnimationFrame(() => control.classList.add('is-bump'));
+  }
+
   function renderGallery(index) {
     currentIndex = (index + slides.length) % slides.length;
 
@@ -131,6 +155,7 @@ if (gallery) {
 
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
+      bumpControl(prevBtn);
       renderGallery(currentIndex - 1);
       startAutoplay();
     });
@@ -138,13 +163,30 @@ if (gallery) {
 
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
+      bumpControl(nextBtn);
       renderGallery(currentIndex + 1);
       startAutoplay();
     });
   }
 
+  gallery.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+      bumpControl(prevBtn);
+      renderGallery(currentIndex - 1);
+      startAutoplay();
+    }
+
+    if (event.key === 'ArrowRight') {
+      bumpControl(nextBtn);
+      renderGallery(currentIndex + 1);
+      startAutoplay();
+    }
+  });
+
   gallery.addEventListener('mouseenter', stopAutoplay);
   gallery.addEventListener('mouseleave', startAutoplay);
+  gallery.addEventListener('focusin', stopAutoplay);
+  gallery.addEventListener('focusout', startAutoplay);
   gallery.addEventListener('touchstart', stopAutoplay, { passive: true });
   gallery.addEventListener('touchend', startAutoplay, { passive: true });
 
